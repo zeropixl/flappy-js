@@ -1,4 +1,4 @@
-import { SpriteSheet } from './spritesheet.js'
+import { SpriteSheet } from './Spritesheet.js'
 
 export function loadImage(path) {
     return new Promise(res => {

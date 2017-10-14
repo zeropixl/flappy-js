@@ -5,6 +5,8 @@ export function generateBackground(b) {
     b.draw(buffer.getContext('2d'), 'bg', 0, 108)
 
     return function drawBackground(ctx) {
+        ctx.fillStyle = 'white';
+        ctx.fillRect(0, 0, 224, 336)
         ctx.drawImage(buffer, 0, 0)
     }
 }
