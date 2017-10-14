@@ -10,21 +10,20 @@ export function loadImage(path) {
     })
 }
 
-export function loadBird(image) {
-    return loadImage('./res/img/spritesheet.png').then(i => {
-        let bird = new SpriteSheet(i)
-        bird.define('bird-u', 312, 230, 34, 24)
-        bird.define('bird-m', 312, 256, 34, 24)
-        bird.define('bird-d', 312, 282, 34, 24)
-        return bird;
+export function loadJson(path) {
+    return fetch(path).then(r => {
+        return r.json()
     })
 }
 
-export function loadBG(image) {
-    return loadImage('./res/img/spritesheet.png').then(i => {
-        let bg = new SpriteSheet(i)
-        bg.define('bg', 0, 0, 276, 228)
-        bg.define('fg', 276, 0, 224, 112)
-        return bg;
+export function loadSprites(sprite) {
+    return new Promise(res => {
+        loadImage('../res/img/spritesheet.png').then(i => {
+            loadJson('../res/json/sprites.json').then(json => {
+                let sprites = new SpriteSheet(i)
+                Object.keys(json[sprite]).forEach(key => sprites.define(json[sprite][key].name, json[sprite][key].x, json[sprite][key].y, json[sprite][key].w, json[sprite][key].h))
+                res(sprites);
+            })
+        })
     })
 }
